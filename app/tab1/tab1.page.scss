@@ -1,0 +1,23 @@
+.thumbs-up {
+    /* Your styles for the outline version of the icon */
+    color: #131212;
+    /* Change this to your default color */
+}
+
+.thumbs-up-filled {
+    /* Your styles for the filled version of the icon */
+    color: rgb(0, 0, 250);
+    /* Change this to your liked color */
+}
+
+swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

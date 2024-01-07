@@ -1,0 +1,90 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Tab 3 </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ng-container *ngIf="role=='company'">
+    <ion-card>
+      <ion-row>
+        <img src="{{details.image}}" />
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="5.5">Name:</ion-col>
+        <ion-col size="5.5"> {{details.name}}</ion-col>
+        <ion-col size="1">
+          <ion-icon
+            name="ellipsis-vertical-sharp"
+            (click)="presentActionSheet(details)"
+          ></ion-icon
+        ></ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Bio:</ion-col>
+        <ion-col> {{details.bio}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Email:</ion-col>
+        <ion-col> {{details.email}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Address:</ion-col>
+        <ion-col> {{details.address}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Contact:</ion-col>
+        <ion-col> {{details.contact}}</ion-col>
+      </ion-row>
+    </ion-card>
+  </ng-container>
+
+  <ng-container *ngIf="role=='customer'">
+    <ion-card>
+      <ion-row>
+        <ion-col size="5">First Name:</ion-col>
+        <ion-col size="5">{{details.firstname}}</ion-col>
+        <ion-col size="2">
+          <ion-icon
+            name="ellipsis-vertical-sharp"
+            (click)="presentActionSheet(details)"
+          ></ion-icon
+        ></ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Last Name:</ion-col>
+        <ion-col>{{details.lastname}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Address:</ion-col>
+        <ion-col>{{details.address}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Email:</ion-col>
+        <ion-col>{{details.email}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Dob:</ion-col>
+        <ion-col> {{details.DOB}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Contact:</ion-col>
+        <ion-col>{{details.contact}}</ion-col>
+      </ion-row>
+    </ion-card>
+  </ng-container>
+  <!-- <app-child></app-child> -->
+</ion-content>

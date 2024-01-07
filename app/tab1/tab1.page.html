@@ -1,0 +1,194 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Tab 1 </ion-title>
+    <ion-menu-button slot="end">
+      <ion-icon name="menu-sharp" (click)="togglemenu()"></ion-icon>
+    </ion-menu-button>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar
+      [debounce]="1000"
+      (keyup)="handleChange($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ng-container *ngIf="details.role=='company'">
+    
+    <ion-card *ngFor="let post of sameMailpost; let i =index">
+      <!-- <ion-slides [pager]="true" [options]="slideOpts">
+        <ion-slide *ngFor="let img of post.image">
+          <img [src]="img" />
+        </ion-slide>
+      </ion-slides> -->
+
+      <swiper-container
+        (slidechange)="swiperSlideChanged($event)"
+        [loop]="true"
+        [pagination]="true"
+      >
+        <swiper-slide *ngFor="let i of post.image">
+          <img [src]="i" width="100" height="100" />
+        </swiper-slide>
+      </swiper-container>
+
+      <ion-row>
+        <ion-col size="5">Title:</ion-col>
+        <ion-col size="5">{{post.title}}</ion-col>
+        <ion-col size="2">
+          <ion-icon
+            name="ellipsis-vertical"
+            (click)="presentActionSheet(post)"
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="5">Description:</ion-col>
+        <ion-col size="5">{{post.description}}</ion-col>
+      </ion-row>
+
+      <ion-row *ngFor=" let cat of post.categoryArray">
+        <ion-col size="5">Category:</ion-col>
+        <ion-col size="5">{{cat.category}}</ion-col>
+      </ion-row>
+    </ion-card>
+  </ng-container>
+
+  <ng-container *ngIf="details.role=='customer'">
+    <ion-card
+      *ngFor="let post of (isFilterActive ? filterItem : postDetails); let i=index"
+    >
+      <!-- <ion-row *ngFor="let i of post.image">
+        <img [src]="i" width="100" height="100" />
+      </ion-row> -->
+
+      <swiper-container
+        (slidechange)="swiperSlideChanged($event)"
+        [loop]="true"
+        [pagination]="true"
+      >
+        <swiper-slide *ngFor="let i of post.image">
+          <img [src]="i" width="100" height="100" />
+        </swiper-slide>
+      </swiper-container>
+
+      <ion-row>
+        <ion-col size="5">Title:</ion-col>
+        <ion-col size="5">{{post.title}}</ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="5">Description:</ion-col>
+        <ion-col size="5">{{post.description}}</ion-col>
+      </ion-row>
+
+      <ion-row *ngFor=" let cat of post.categoryArray">
+        <ion-col size="5">Category:</ion-col>
+        <ion-col size="5">{{cat.category}}</ion-col>
+      </ion-row>
+
+      <ng-container *ngIf="details.role=='customer'">
+        <ion-card>
+          <ion-row>
+            <ion-col size="6">
+              {{totalLikes}}
+              <ion-icon
+                name="thumbs-up"
+                size="large"
+                (click)="likeDislike(post)"
+                [ngClass]="{'thumbs-up-filled': isLiked[post.postId], 'thumbs-up': !isLiked[post.postId]}"
+              >
+              </ion-icon>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-button size="small" (click)="sendData(post)">
+                Comment
+              </ion-button>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-icon name="thumbs-up" size="large" (click)="checkLike(post)">
+              </ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-badge color="light">
+              <ion-button
+                size="small"
+                (click)=" likePost(post,'like')"
+                [disabled]="Age < 20"
+              >
+                Like
+              </ion-button>
+              {{post.like}}
+            </ion-badge>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-badge color="light">
+              <ion-button
+                size="small"
+                color="danger"
+                (click)="likePost(post,'dislike')"
+                [disabled]="Age < 20"
+              >
+                Dislike
+              </ion-button>
+              {{post.dislike}}
+            </ion-badge>
+          </ion-col>
+        </ion-row>
+
+        <!-- <form [formGroup]="form">
+          <ion-card>
+            <ion-input
+              text="type"
+              placeholder="Comment"
+              formControlName="comment"
+            ></ion-input>
+           <ion-button
+              size="small"
+              (click)="AddComment(form.value,post)"
+              (click)="sendData(post)"
+            >
+              Add Comment
+            </ion-button> 
+             <ion-button size="small" (click)="sendData(post)">
+              comment
+            </ion-button> 
+
+            <ion-button
+              size="medium"
+              fill="outline"
+              (click)="removeComment(post)"
+            >
+              <ion-icon name="trash-sharp" color="danger"></ion-icon>
+            </ion-button> 
+          </ion-card>
+        </form> -->
+        <!-- <ion-card>
+          <ion-list *ngFor="let cmt of CommentShow">
+            <ion-row>
+              <ion-col size="9">{{cmt.comment}}</ion-col>
+              <ion-col size="3">
+                <ion-button
+                  size="medium"
+                  fill="outline"
+                  (click)="removeComment(cmt)"
+                >
+                  <ion-icon name="trash-sharp" color="danger"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+        </ion-card> -->
+      </ng-container>
+    </ion-card>
+  </ng-container>
+</ion-content>

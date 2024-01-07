@@ -1,0 +1,194 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-select [(ngModel)]="SelectedRolled" placeholder="Select role">
+      <ion-select-option value="Company">Company</ion-select-option>
+      <ion-select-option value="Customer">Customer</ion-select-option>
+    </ion-select>
+  </ion-card>
+
+  <ion-card *ngIf="SelectedRolled == 'Customer'">
+    <form [formGroup]="customerReg" (ngSubmit)="Submit(customerReg.value)">
+      <ion-row>
+        <ion-col>Name</ion-col>
+        <ion-col>
+          <ion-input
+            type="text"
+            formControlName="name"
+            placeholder="enter name"
+          ></ion-input>
+          <span
+            *ngIf="customerReg.controls['name'].hasError('required') && (customerReg.controls['name'].dirty  || customerReg.controls['name'].touched)"
+            style="color: red"
+            >Please Enter Your Name</span
+          >
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Phone Num</ion-col>
+        <ion-col>
+          <ion-input
+            type="num"
+            formControlName="num"
+            placeholder="enter number"
+          ></ion-input>
+          <span
+            *ngIf="customerReg.controls['num'].hasError('required') && (customerReg.controls['num'].dirty  || customerReg.controls['num'].touched)"
+            style="color: red"
+            >Please Enter Your Number</span
+          >
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Email</ion-col>
+        <ion-col>
+          <ion-input
+            type="email"
+            formControlName="email"
+            placeholder="enter email"
+          ></ion-input>
+          <span
+            *ngIf="customerReg.controls['email'].hasError('required') && (customerReg.controls['email'].dirty  || customerReg.controls['email'].touched)"
+            style="color: red"
+            >Please Enter Your Email</span
+          >
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Password</ion-col>
+        <ion-col>
+          <ion-input
+            type="password"
+            formControlName="password"
+            placeholder="enter password"
+          ></ion-input>
+          <span
+            *ngIf="customerReg.controls['password'].hasError('required') && (customerReg.controls['password'].dirty  || customerReg.controls['password'].touched)"
+            style="color: red"
+            >Please Enter Your Password</span
+          >
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Confirm Password</ion-col>
+        <ion-col>
+          <ion-input
+            type="password"
+            formControlName="Cpassword"
+            placeholder="enter Confirm password"
+          ></ion-input>
+          <span
+            *ngIf="customerReg.controls['Cpassword'].hasError('required') && (customerReg.controls['Cpassword'].dirty  || customerReg.controls['Cpassword'].touched)"
+            style="color: red"
+            >Please Enter Your Confirm Password</span
+          >
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-button type="submit" expand="full">Submit</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-card>
+
+  <ion-card *ngIf="SelectedRolled == 'Company'">
+    <form [formGroup]="companyReg" (ngSubmit)="Submit(companyReg.value)">
+      <ion-row>
+        <ion-col>Company Name</ion-col>
+        <ion-col>
+          <ion-input
+            type="text"
+            formControlName="name"
+            placeholder="enter name"
+          ></ion-input>
+          <span
+            *ngIf="companyReg.controls['name'].hasError('required') && (companyReg.controls['name'].dirty  || companyReg.controls['name'].touched)"
+            style="color: red"
+            >Please Enter Your Name</span
+          >
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Company Address</ion-col>
+        <ion-col>
+          <ion-input
+            type="text"
+            formControlName="add"
+            placeholder="enter Address"
+          ></ion-input>
+          <span
+            *ngIf="companyReg.controls['add'].hasError('required') && (companyReg.controls['add'].dirty  || companyReg.controls['add'].touched)"
+            style="color: red"
+            >Please Enter Your Address</span
+          >
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Company Email</ion-col>
+        <ion-col>
+          <ion-input
+            type="email"
+            formControlName="email"
+            placeholder="enter email"
+          ></ion-input>
+          <span
+            *ngIf="companyReg.controls['email'].hasError('required') && (companyReg.controls['email'].dirty  || companyReg.controls['email'].touched)"
+            style="color: red"
+            >Please Enter Your Email</span
+          >
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Company Password</ion-col>
+        <ion-col>
+          <ion-input
+            type="password"
+            formControlName="password"
+            placeholder="enter password"
+          ></ion-input>
+          <span
+            *ngIf="companyReg.controls['password'].hasError('required') && (companyReg.controls['password'].dirty  || companyReg.controls['password'].touched)"
+            style="color: red"
+            >Please Enter Your Password</span
+          >
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>Confirm Password</ion-col>
+        <ion-col>
+          <ion-input
+            type="password"
+            formControlName="Cpassword"
+            placeholder="enter Confirm password"
+          ></ion-input>
+          <span
+            *ngIf="companyReg.controls['Cpassword'].hasError('required') && (companyReg.controls['Cpassword'].dirty  || companyReg.controls['Cpassword'].touched)"
+            style="color: red"
+            >Please Enter Your Confirm Password</span
+          >
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-button type="submit" expand="full">Submit</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-card>
+</ion-content>

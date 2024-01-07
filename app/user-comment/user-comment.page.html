@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>UserComment</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="form">
+    <ion-card>
+      <ion-input
+        text="type"
+        placeholder="Comment"
+        formControlName="comment"
+      ></ion-input>
+      <ion-button
+        size="small"
+        (click)="AddComment(form.value)"
+        [disabled]="form.invalid"
+      >
+        Add Comment
+      </ion-button>
+    </ion-card>
+  </form>
+
+  <ion-card>
+    <ion-list *ngFor="let cmt of CommentShow">
+      <ion-row>
+        <ion-col size="9"> <h3>{{cmt.comment}}</h3></ion-col>
+        <ion-col size="3">
+          <ion-button
+            size="small"
+            fill="outline"
+            (click)="removeComment(cmt)"
+            *ngIf="cmt.email==Email"
+          >
+            <ion-icon name="trash-sharp" color="danger"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </ion-card>
+</ion-content>

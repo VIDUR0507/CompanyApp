@@ -1,0 +1,15 @@
+<ion-app>
+  <ion-menu contentId="main-content" side="end">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Dashboard</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-menu-toggle>
+        <ion-button color="danger" (click)="logout()">Logout</ion-button>
+      </ion-menu-toggle>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-app>

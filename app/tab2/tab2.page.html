@@ -1,0 +1,126 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Tab 2 </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ng-container *ngIf="role=='company'">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <ion-card>
+        <!-- <img src="{{imageUrl}}" />
+      <ion-item>
+        <ion-input type="file" (change)="setImage($event)"></ion-input>
+      </ion-item> -->
+
+        <img
+          *ngFor="let url of imageUrl"
+          [src]="url"
+          alt=""
+          width="100"
+          height="100"
+        />
+        <ion-item>
+          <ion-input
+            type="file"
+            id="imgg"
+            #imgg
+            (change)="Image($event)"
+            multiple="true"
+            hidden
+          ></ion-input>
+
+          <!-- <ion-icon
+            name="images"
+            width="200"
+            height="150"
+            (click)="upload()"
+          ></ion-icon> -->
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>Title:</ion-label>
+          <ion-input type="text" formControlName="title"></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form.get('title')?.hasError('required') && (form.get('title')?.dirty || form.get('title')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <ion-item lines="none">
+          <ion-label>description:</ion-label>
+          <ion-input type="text" formControlName="description"></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form.get('description')?.hasError('required') && (form.get('description')?.dirty || form.get('description')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <ion-card formArrayName="categoryArray">
+          <ion-row
+            *ngFor="let p of categoryControls;  let formArrayID = index;"
+            [formGroupName]="formArrayID"
+          >
+            <ion-col size="7" style="font-size: large"
+              >Category
+              <ion-select
+                placeholder="Type"
+                formControlName="category"
+                (ionFocus)="updateList($event)"
+              >
+                <ion-select-option
+                  [value]="item.label"
+                  *ngFor="let item of cats"
+                  [disabled]="item.selected"
+                  >{{item.label}}</ion-select-option
+                >
+              </ion-select>
+              <p
+                *ngIf="p.get('category')?.hasError('required') && (p.get('category')?.dirty || p.get('category')?.touched)"
+                style="font-size: medium; color: red"
+              >
+                <sup>*</sup>This field is required.
+              </p>
+            </ion-col>
+
+            <ion-col size="5">
+              <ng-container *ngIf="formArrayID >= 0">
+                <ion-button
+                  fill="outline"
+                  color="danger"
+                  (click)="removeCategory(formArrayID)"
+                >
+                  <ion-icon name="trash"></ion-icon>
+                </ion-button>
+              </ng-container>
+            </ion-col>
+          </ion-row>
+
+          <div>
+            <ion-button
+              fill="solid"
+              color="dark"
+              expand="block"
+              size="small"
+              (click)="addCategory(formArrayID)"
+            >
+              <ion-icon name="add-circle"></ion-icon> Add Category
+            </ion-button>
+          </div>
+        </ion-card>
+
+        <div style="display: flex; justify-content: center">
+          <ion-button type="submit" [disabled]="form.invalid" color="success">
+            Save
+          </ion-button>
+        </div>
+      </ion-card>
+    </form>
+  </ng-container>
+  <app-parent-component></app-parent-component>
+</ion-content>

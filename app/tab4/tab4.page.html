@@ -1,0 +1,199 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>tab4</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ng-container *ngIf="Userrole=='company'">
+    <form [formGroup]="form" (ngSubmit)="UpdateUserData('company')">
+      <ion-card>
+        <ion-item lines="none">
+          <ion-label>Name:</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form.get('name')?.hasError('required') && (form.get('name')?.dirty || form.get('name')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <ion-item lines="none">
+          <ion-label>Bio:</ion-label>
+          <ion-input type="text" formControlName="bio"></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form.get('bio')?.hasError('required') && (form.get('bio')?.dirty || form.get('bio')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <ion-item lines="none">
+          <ion-label>Email:</ion-label>
+          <ion-input
+            type="text"
+            formControlName="email"
+            readonly="true"
+          ></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form.get('email')?.hasError('required') && (form.get('email')?.dirty || form.get('email')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <ion-item lines="none">
+          <ion-label>Address:</ion-label>
+          <ion-input type="text" formControlName="address"></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form.get('address')?.hasError('required') && (form.get('address')?.dirty || form.get('address')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <ion-item lines="none">
+          <ion-label>contact:</ion-label>
+          <ion-input type="text" formControlName="contact"></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form.get('contact')?.hasError('required') && (form.get('contact')?.dirty || form.get('contact')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <ion-item lines="none">
+          <ion-label>Role:</ion-label>
+          <ion-input
+            type="text"
+            formControlName="role"
+            readonly="true"
+          ></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form.get('role')?.hasError('required') && (form.get('role')?.dirty || form.get('role')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <div style="display: flex; justify-content: center">
+          <ion-button
+            type="submit"
+            [disabled]="form.invalid "
+            color="success"
+            class="ion-text-center"
+          >
+            Update
+          </ion-button>
+        </div>
+      </ion-card>
+    </form>
+  </ng-container>
+
+  <!-- Customer Code -->
+
+  <ng-container *ngIf="Userrole =='customer'">
+    <form [formGroup]="form2" (ngSubmit)="UpdateUserData('customer')">
+      <ion-card>
+        <ion-item lines="none">
+          <ion-label>FirstName:</ion-label>
+          <ion-input type="text" formControlName="firstname"></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form2.get('firstname')?.hasError('required') && (form2.get('firstname')?.dirty || form2.get('firstname')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <ion-item lines="none">
+          <ion-label>LastName:</ion-label>
+          <ion-input type="text" formControlName="lastname"></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form2.get('lastname')?.hasError('required') && (form2.get('lastname')?.dirty || form2.get('lastname')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <ion-item lines="none">
+          <ion-label>Email:</ion-label>
+          <ion-input
+            type="text"
+            formControlName="email"
+            readonly="true"
+          ></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form2.get('email')?.hasError('required') && (form2.get('email')?.dirty || form2.get('email')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <ion-item lines="none">
+          <ion-label>Address:</ion-label>
+          <ion-input type="text" formControlName="address"></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form2.get('address')?.hasError('required') && (form2.get('address')?.dirty || form2.get('address')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <ion-item lines="none">
+          <ion-label>Contact:</ion-label>
+          <ion-input type="text" formControlName="contact"></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form2.get('contact')?.hasError('required') && (form2.get('contact')?.dirty || form2.get('contact')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <ion-item fill="solid" id="open-date-input3" lines="none">
+          <ion-label>DOB:</ion-label>
+          <ion-input
+            type="text"
+            formControlName="DOB"
+            [value]="dob"
+          ></ion-input>
+          <ion-popover trigger="open-date-input3" show-backdrop="false">
+            <ng-template>
+              <ion-datetime
+                presentation="date"
+                #popoverDatetime
+                (ionChange)="dob=formatDate(popoverDatetime.value); form2.get('DOB')?.setValue(dob)"
+                [showDefaultButtons]="true"
+              >
+              </ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+        <p
+          *ngIf="form2.get('DOB')?.hasError('required') && (form2.get('DOB')?.dirty || form2.get('DOB')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <ion-item lines="none">
+          <ion-label>Role:</ion-label>
+          <ion-input
+            type="text"
+            formControlName="role"
+            readonly="true"
+          ></ion-input>
+        </ion-item>
+        <p
+          *ngIf="form2.get('role')?.hasError('required') && (form2.get('role')?.dirty || form2.get('role')?.touched)"
+        >
+          <sup>*</sup>Field is required
+        </p>
+
+        <div style="display: flex; justify-content: center">
+          <ion-button type="submit" [disabled]="form2.invalid" color="success"
+            >Update</ion-button
+          >
+        </div>
+      </ion-card>
+    </form>
+  </ng-container>
+</ion-content>
